@@ -1,0 +1,35 @@
+<apex:page lightningStylesheets="true" standardController="Opportunity"  extensions="OpportunitiesWonAndClose" >
+    <apex:form >
+    <apex:pageBlock title="Oportunidades Ganadas y Cerradas">
+      <apex:pageBlockTable value="{!ListaOpp}" var="Opp">
+       <apex:column >
+        <apex:facet name="header">Nombre</apex:facet>
+        <apex:outputLink value="showDataPDF?Id={!Opp.Id}">{!Opp.Name}</apex:outputLink>
+       </apex:column>
+       <apex:column >
+        <apex:facet name="header">Cuenta</apex:facet>
+        <apex:outputText value="{!Opp.Account.Name}" />
+       </apex:column>
+       <apex:column >
+        <apex:facet name="header">Monto</apex:facet>
+        <apex:outputText value="{!Opp.Amount}"/>
+       </apex:column>
+       <apex:column >
+        <apex:facet name="header">Fecha de cierre</apex:facet>
+        <apex:outputText value="{!Opp.CloseDate}"/>
+       </apex:column>
+       <apex:column >
+        <apex:facet name="header">Etapa</apex:facet>
+        <apex:outputText value="{!Opp.StageName}"/>
+       </apex:column>
+       <apex:column >
+        <apex:facet name="header">Tipo</apex:facet>
+        <apex:outputText value="{!Opp.Type}"/>
+       </apex:column>
+      </apex:pageBlockTable>
+    </apex:pageBlock>
+    <apex:pageBlock >
+   		<apex:commandButton value="Exportar a Excel" action="{!exportData}"/>  
+    </apex:pageBlock>
+   </apex:form>
+</apex:page>

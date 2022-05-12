@@ -1,0 +1,32 @@
+<apex:page lightningStylesheets="true" standardController="Opportunity"  extensions="OpportunitiesWonAndClose" contentType="application/vnd.ms-excel">
+   <apex:form >
+    <apex:pageBlock title="Oportunidades Ganadas y Cerradas">
+      <apex:pageBlockTable value="{!ListaOpp}" var="Opp">
+       <apex:column >
+        <apex:facet name="header" >Nombre</apex:facet>
+        <apex:outputText value="{!Opp.Name}" />
+       </apex:column>
+       <apex:column >
+        <apex:facet name="header">Cuenta</apex:facet>
+        <apex:outputText value="{!Opp.AccountId}" />
+       </apex:column>
+       <apex:column >
+        <apex:facet name="header">Monto</apex:facet>
+        <apex:outputText value="{!Opp.Amount}"/>
+       </apex:column>
+       <apex:column >
+        <apex:facet name="header">Fecha de cierre</apex:facet>
+        <apex:outputText value="{!Opp.CloseDate}"/>
+       </apex:column>
+       <apex:column >
+        <apex:facet name="header">Etapa</apex:facet>
+        <apex:outputText value="{!Opp.StageName}"/>
+       </apex:column>
+       <apex:column >
+        <apex:facet name="header">Tipo</apex:facet>
+        <apex:outputText value="{!Opp.Type}"/>
+       </apex:column>
+      </apex:pageBlockTable>
+    </apex:pageBlock>
+   </apex:form>
+</apex:page>

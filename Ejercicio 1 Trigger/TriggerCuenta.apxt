@@ -1,0 +1,44 @@
+/********************************* 
+ * Author: John Alejandro Bedoya *
+ * Date:   04/2022               *
+ * Description: Test Xervica     *
+ ********************************/
+trigger TriggerCuenta on Account (after update) {
+    
+    //Variables Globales
+	public static String activaNew; 
+    public static String activaOld;
+    
+    //Recorre y guarda el valor de activa antes y despues de actualizar
+    for(Account accOld : Trigger.Old){
+       activaOld  = accOld.Activa__c;
+    }
+    for(Account accNew : Trigger.New){
+       activaNew  = accNew.Activa__c;
+    }
+    
+    if(Trigger.isUpdate){
+        if (Trigger.isAfter) {
+             for(Account a : Trigger.New) {
+                if(activaOld.equals('SI') && activaNew.equals('NO')){
+                    //Primera parte
+                    List<Opportunity> ListOpp = [SELECT Id, StageName, Description FROM Opportunity WHERE AccountId = :a.id AND StageName != 'Closed Won' AND StageName != 'Closed Lost'];
+                    for (Opportunity opp : ListOpp){
+                        opp.StageName = 'Closed Lost';
+                        opp.Description = 'Cerrada por Cuenta Inactiva';
+                    }
+                    update ListOpp;
+                    //Segunda parte
+                    List<Contact> ListCont = [SELECT Id, Name, Rol__c FROM Contact WHERE AccountId = :a.id AND Rol__c = 'Influyente'];
+                    for (Contact cont: ListCont){
+                        Ex_Clientes__c exc = new Ex_Clientes__c();
+                        exc.Contacto__c = cont.Id;
+                        exc.Name = cont.Name;
+                        exc.Generado_Automaticamente__c = true;
+                        insert exc;
+                    }
+                }
+            }
+        }
+    }
+}

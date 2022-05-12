@@ -1,0 +1,27 @@
+<apex:page  standardController="Opportunity"   extensions="ShowDataPDF_Controller" renderAs="pdf">
+   <apex:stylesheet value="{!$Resource.StyleTablePDF}" />
+   <apex:form >
+    <apex:pageBlock title="Oportunidades Ganadas y Cerradas">
+      <apex:pageBlockTable value="{!ListaOpp}" var="Opp" styleClass="tableStyle"> 
+       <apex:column headerValue="Nombre" headerClass="headerStyle" styleClass="column">
+        <apex:outputText value="{!Opp.Name}" />
+       </apex:column>
+       <apex:column headerValue="Cuenta" headerClass="headerStyle" styleClass="column">
+        <apex:outputText value="{!Opp.AccountId}" />
+       </apex:column>
+       <apex:column headerValue="Cantidad" headerClass="headerStyle" styleClass="column">
+        <apex:outputText value="{!Opp.Amount}"/>
+       </apex:column>
+       <apex:column headerValue="Fecha de Cierre" headerClass="headerStyle" styleClass="column">
+        <apex:outputText value="{!Opp.CloseDate}"/>
+       </apex:column>
+       <apex:column headerValue="Etapa" headerClass="headerStyle" styleClass="column">
+        <apex:outputText value="{!Opp.StageName}"/>
+       </apex:column>
+       <apex:column headerValue="Tipo" headerClass="headerStyle" styleClass="column">
+        <apex:outputText value="{!Opp.Type}"/>
+       </apex:column>
+      </apex:pageBlockTable>
+    </apex:pageBlock>
+   </apex:form>
+</apex:page>

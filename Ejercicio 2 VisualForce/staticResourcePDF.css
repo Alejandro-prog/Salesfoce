@@ -1,0 +1,20 @@
+.column {
+	border: 1px solid #ddd;
+	padding: 8px;
+	border: 1px solid #000;
+}
+
+.headerStyle {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: center;
+    background-color: #00FBFF;
+	border: 1px solid #000;
+    color: Black;
+}
+
+.tableStyle {
+	font-family: Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+}

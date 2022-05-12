@@ -1,0 +1,36 @@
+<aura:component  controller="OpportunityWonAndClose_Controller"  implements="flexipage:availableForRecordHome,force:hasRecordId" access="global">
+    
+   <!-- Atributos Aura --> 
+   <aura:attribute name="Opportunities" type="List" />
+   <aura:attribute name="Id" type="String" />
+    
+   <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+     
+    <table class="slds-table slds-table--bordered slds-table--striped slds-table--cell-buffer" >
+        
+        <thead>          
+            <tr class="slds-text-heading--small"> 
+                <th scope="col">Nombre</th>
+                <th scope="col">Cuenta</th>
+                <th scope="col">Monto</th>
+                <th scope="col">Fecha de Cierre</th>
+                <th scope="col">Etapa</th>
+                <th scope="col">Tipo</th>
+            </tr>
+        </thead>
+       
+        <tbody class="slds-truncate">
+            <aura:iteration items="{!v.Opportunities}" var="opp">
+                <tr>
+                   <td><lightning:formattedUrl label="{!opp.Name}" value="{! v.Id + '/' + opp.Id}" target="_blank"/></td>                      
+                    <td><span class="slds-truncate">{!opp.Account.Name}</span></td>     
+                    <td><span class="slds-truncate">{!opp.Amount}</span></td>                
+                    <td><span class="slds-truncate">{!opp.CloseDate}</span></td>
+                    <td><span class="slds-truncate">{!opp.StageName}</span></td> 
+                    <td><span class="slds-truncate">{!opp.Type}</span></td>        
+                </tr>
+            </aura:iteration>
+        </tbody>
+    </table>
+    
+</aura:component>
